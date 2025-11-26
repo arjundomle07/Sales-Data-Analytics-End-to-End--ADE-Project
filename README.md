@@ -86,10 +86,3 @@ image
 End Notes
 This project provides a great overview to many of Azure services such as Azure Data Factory, Azure Databricks, Azure Synapse Analytics.
 
-The resources we create in Azure can be secured by adding contributors into a Security Group. This feature is offered in Microsoft Entra ID (previously Azure Active Directory). Thus, whoever belonging to the Security group can access and contribute to the project freely.
-
-The Database is although small, made it easier to visualize the scope and working of various services at once.
-
-Another thing to note is that, project couldve been made smaller using only Azure Data factory but I added Databricks and Synapse Analytics to explore what these have to offer.
-
-Project done by Balachandar.S

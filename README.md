@@ -8,8 +8,7 @@ The goal is to create an Azure solution which can take an On-premise Database su
 
 This solution can be connected to a visualization and reporting dashboard using Microsoft Power BI.
 
-![Architecture](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Arc%20img%202.png)
-
+![Architecture](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/Arc%20img%202.png)
 
 Data Migration to the Cloud is one of the most common scenarios the Data Engineers encounter when building solutions for a small-medium organization. By working on this project, I was able to learn these skills:
 
@@ -18,7 +17,6 @@ ETL techniques using Azure Cloud Services
 Data Transformation
 Data Analytics and Dashboard Reporting
 Data Security and Governance
-References: Mr. K Talks Tech video on E2E Azure Data Engineering Project [https://www.youtube.com/watch?v=iQ41WqhHglk&t=3624s]
 
 Prerequisites:
 Microsoft SQL Server Managment System (SSMS)
@@ -31,7 +29,7 @@ Implementation:
 Part 1: Data Ingestion
 Restore the Sales Database from the .bak file.
 
-image
+![SQL SERVER](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DATAIng1.png)
 
 Setup the Microsoft Integration Runtime between Azure and the On-premise SQL Server.
 
@@ -39,22 +37,26 @@ Create a Copy Pipeline which loads the data from local on-premise server into Az
 
 Note that the Data is stored in "Parquet format" in ADLS Gen2 storage folders.
 
-image
+![ADF](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DATAIng2.jpg)
 
 Part 2: Data Transformation
 Data is Loaded into Azure Databricks where can create PySpark Notebooks. Cluster nodes, and compute automatically managed by the Databricks service. The Initial Data is cleaned and processed in two steps. Bronze to Silver and Silver to Gold. 0. Mounting the ADLS
 
 In Bronze to Silver transformation, we apply Attribute Type Changes and move this preprocessed data from Bronze to Silver folders.
-In Silver to Gold transformation, we rename the Attributes to follow similar Naming Convention throughout the database. Then we move this into Gold folder.
-The Final Gold-level Data is suitable for business reporting and making dashboard visualizations. Gold-level data is in "Delta" format. image image image
 
+In Silver to Gold transformation, we rename the Attributes to follow similar Naming Convention throughout the database. Then we move this into Gold folder.
+
+The Final Gold-level Data is suitable for business reporting and making dashboard visualizations. Gold-level data is in "Delta" format. image image image
+![DT1](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DT1.png)
+![DT2](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DT2.png)
+![DT3](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DT3.jpg)
 Launch Azure Databricks and run transformations using these notebooks "bronze to silver" and "silver to gold".
 
-image
+![DT4](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DT4.jpg)
 
 These Notebooks are integrated into the Azure Data Factory Pipeline. Thus automating the Data Ingestion and Transformation process.
 
-image
+![DT5](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DT5.jpg)
 
 Part 3: Data Loading
 Load the "gold" level data and run the Azure Synapse Pipeline. This pipeline:
@@ -63,26 +65,34 @@ Retrieves the Table Names from the gold folder.
 
 For each table, A Stored Procedure is executed which creates and updates View in Azure SQL Database..
 
-image
+![DL1](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DATALOADING1.jpg)
 
 Part 4: Data Reporting
 Finally, load the data from the views using Microsoft Power BI. The Data is retrieved using DirectQuery to automatically run and update from the Cloud Pipelines.
 
-An Interactive Dashboard is created to showcase the sales data figures. image
+An Interactive Dashboard is created to showcase the sales data figures.
 
-image
+![DR1](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DR1.jpg)
+
+![DR2](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/DR2.jpg)
 
 Part 5: End-to-end Pipeline Testing
-Once all the components are ready, we can create a Scheduled Trigger, which will allow the Data Factory Pipeline to be run once every day. image
+Once all the components are ready, we can create a Scheduled Trigger, which will allow the Data Factory Pipeline to be run once every day.
+
+![PT1](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/PT1.jpg)
 
 Using this trigger makes it easy to automatically extract, load , transform the latest data. This data can be refreshed in Power BI from time to time.
 
 Before running the trigger:
-image
+![TR1](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/TR1.jpg)
 
 After running the trigger:
-image
+![TR2](https://github.com/arjundomle07/Sales-Data-Analytics-End-to-End--ADE-Project/blob/main/Assets/TR2.jpg)
 
 End Notes
 This project provides a great overview to many of Azure services such as Azure Data Factory, Azure Databricks, Azure Synapse Analytics.
+
+
+
+
 
